@@ -22,7 +22,7 @@ class Post(models.Model):
         upload_to='posts/', null=True, blank=True)
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE,
-        related_name="posts", blank=True, null=True
+        related_name='posts', blank=True, null=True
     )
 
     def __str__(self):
@@ -45,19 +45,19 @@ class Comment(models.Model):
 class Follow(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE,
-        related_name="follower",
+        related_name='follower',
         verbose_name='Подписчик',
     )
     following = models.ForeignKey(
         User, on_delete=models.CASCADE,
-        related_name="following",
+        related_name='following',
         verbose_name='Тот, на кого подписались',
     )
 
     class Meta:
-        constraints = [models.UniqueConstraint(fields=["user", "following"],
-                                               name="unique_follow")]
-        verbose_name_plural = "Подписки"
+        constraints = [models.UniqueConstraint(fields=['user', 'following'],
+                                               name='unique_follow')]
+        verbose_name_plural = 'Подписки'
 
     def __str__(self):
         return f'{self.user} following {self.following}'
